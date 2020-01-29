@@ -50,9 +50,8 @@ class PlayingField extends Component {
 
   gameStartAndFail = () => {
     if (
-      this.state.computerScore >=
-        Math.round(this.state.fields.length / 2) - 1 ||
-      this.state.playerScore >= Math.round(this.state.fields.length / 2) - 1
+      this.state.computerScore >= Math.floor(this.state.fields.length / 2) ||
+      this.state.playerScore >= Math.floor(this.state.fields.length / 2)
     ) {
       this.props.setGameFinished(true);
       this.props.setGameInProgress(false);
