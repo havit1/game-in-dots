@@ -79,6 +79,7 @@ class App extends Component {
           <GameSettingsBar
             gameSettings={gameSettings}
             setGameMode={this.setGameModeValue}
+            gameMode={gameMode}
             onNameChange={this.onNameChange}
             playerName={playerName}
             setGameInProgress={this.setGameInProgress}

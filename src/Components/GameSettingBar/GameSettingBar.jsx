@@ -12,7 +12,8 @@ class GameSettingsBar extends Component {
       gameInProgress,
       setGameFinished,
       gameFinished,
-      setWinnerName
+      setWinnerName,
+      gameMode
     } = this.props;
 
     const chaningMode = e => {
@@ -54,7 +55,7 @@ class GameSettingsBar extends Component {
         />
         <button
           className="btn btn-outline-success my-2 my-sm-0"
-          disabled={!playerName || gameInProgress}
+          disabled={!playerName || gameInProgress || !gameMode}
           onClick={onButtonClick}
         >
           {gameFinished ? "Replay" : "Play"}
