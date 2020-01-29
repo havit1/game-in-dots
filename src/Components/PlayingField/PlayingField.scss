@@ -1,0 +1,22 @@
+.playing-area {
+  width: 60%;
+  margin: 0 auto;
+
+  &__winner-name {
+    display: block;
+    height: 70px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  &__field {
+    display: grid;
+    grid-auto-rows: 1fr;
+
+    &-element {
+      padding-bottom: 30%;
+      border: 1px solid black;
+    }
+  }
+}
