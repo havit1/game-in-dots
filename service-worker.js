@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/game-in-dots/precache-manifest.29e7858c385983c74e7cc6a0aaeac0a6.js"
+  "/game-in-dots/precache-manifest.74d029153d26a2511e7441a1e37fface.js"
 );
 
 self.addEventListener('message', (event) => {
