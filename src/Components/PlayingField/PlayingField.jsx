@@ -101,11 +101,11 @@ class PlayingField extends Component {
 
   render() {
     const { fields } = this.state;
-    const { gameMode, winnerName } = this.props;
+    const { gameMode, winnerName, gameFinished } = this.props;
 
     return (
       <section className="playing-area">
-        {winnerName ? (
+        {winnerName && gameFinished ? (
           <h2 className="playing-area__winner-name">{winnerName} won</h2>
         ) : (
           <span className="playing-area__winner-name"></span>

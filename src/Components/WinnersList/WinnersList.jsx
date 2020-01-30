@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from "moment";
 import "./WinnersList.scss";
 
 const WINNERS_LIST_URL =
@@ -6,7 +7,8 @@ const WINNERS_LIST_URL =
 
 class WinnersList extends Component {
   state = {
-    winnersList: []
+    winnersList: [],
+    sent: false
   };
 
   getWinnersList = async () => {
@@ -19,13 +21,22 @@ class WinnersList extends Component {
     }
   };
 
-  onSomeoneWins = name => {
+  sendWinnerAndUpdate = name => {
     if (this.props.gameFinished) {
       const winner = {
         winner: name,
-        date: new Date()
+        date: moment().format("H:mm; D MMMM YYYY"),
+        id: Math.random()
       };
-      console.log(JSON.stringify(winner));
+      fetch(WINNERS_LIST_URL, {
+        method: "POST",
+        body: JSON.stringify(winner),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(res => this.setState({ winnersList: res }));
     }
   };
 
@@ -35,7 +46,7 @@ class WinnersList extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      this.onSomeoneWins(this.props.winnerName);
+      this.sendWinnerAndUpdate(this.props.winnerName);
     }
   }
 
@@ -52,7 +63,9 @@ class WinnersList extends Component {
                 {winner.winner}
               </div>
               <div className="winner-list__list-element-date">
-                {winner.date}
+                {moment(winner.date, "H:mm; D MMMM YYYY").format(
+                  "D MMMM YYYY, H:mm"
+                ) || winner.date}
               </div>
             </div>
           ))}

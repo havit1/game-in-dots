@@ -28,7 +28,6 @@ class App extends Component {
         }
       }
       this.setState({ gameSettings: data });
-      // this.setState({ gameMode: data.easyMode });
     } catch (err) {
       console.error(err);
     }
@@ -45,8 +44,8 @@ class App extends Component {
     this.setState({ gameMode: modeSettings });
   };
 
-  onNameChange = e => {
-    this.setState({ playerName: e.currentTarget.value });
+  onNameChange = name => {
+    this.setState({ playerName: name });
   };
 
   setGameInProgress = state => {
@@ -65,43 +64,42 @@ class App extends Component {
 
   render() {
     const {
-      gameSettings,
-      playerName,
       gameMode,
-      gameInProgress,
+      winnerName,
+      playerName,
+      gameSettings,
       gameFinished,
-      winnerName
+      gameInProgress
     } = this.state;
 
     return (
       <div className="App">
         <section className="gaming-section">
           <GameSettingsBar
-            gameSettings={gameSettings}
-            setGameMode={this.setGameModeValue}
             gameMode={gameMode}
-            onNameChange={this.onNameChange}
             playerName={playerName}
-            setGameInProgress={this.setGameInProgress}
-            gameInProgress={gameInProgress}
-            setGameFinished={this.setGameFinished}
             gameFinished={gameFinished}
-            setWinnerName={this.setWinnerName}
+            gameSettings={gameSettings}
+            gameInProgress={gameInProgress}
+            onNameChange={this.onNameChange}
+            setGameMode={this.setGameModeValue}
+            setGameFinished={this.setGameFinished}
+            setGameInProgress={this.setGameInProgress}
           />
           {gameMode && (
             <PlayingField
+              gameMode={gameMode}
+              winnerName={winnerName}
+              playerName={playerName}
+              gameFinished={gameFinished}
+              gameInProgress={gameInProgress}
+              setWinnerName={this.setWinnerName}
               setGameFinished={this.setGameFinished}
               setGameInProgress={this.setGameInProgress}
-              gameFinished={gameFinished}
-              gameMode={gameMode}
-              gameInProgress={gameInProgress}
-              winnerName={winnerName}
-              setWinnerName={this.setWinnerName}
-              playerName={playerName}
             />
           )}
         </section>
-        {<WinnersList winnerName={winnerName} gameFinished={gameFinished} />}
+        <WinnersList winnerName={winnerName} gameFinished={gameFinished} />
       </div>
     );
   }

@@ -2,38 +2,30 @@ import React, { Component } from "react";
 import "./GameSettingBar.scss";
 
 class GameSettingsBar extends Component {
+  state = {
+    name: ""
+  };
+
+  chaningMode = e => {
+    this.props.setGameFinished(false);
+    this.props.setGameMode(e);
+  };
+
+  onButtonClick = () => {
+    this.props.setGameFinished(false);
+    this.props.setGameInProgress(true);
+    this.props.onNameChange(this.state.name);
+  };
+
   render() {
-    const {
-      gameSettings,
-      setGameMode,
-      onNameChange,
-      playerName,
-      setGameInProgress,
-      gameInProgress,
-      setGameFinished,
-      gameFinished,
-      setWinnerName,
-      gameMode
-    } = this.props;
-
-    const chaningMode = e => {
-      return setGameMode(e);
-    };
-
-    const onButtonClick = () => {
-      setGameFinished(false);
-      setGameInProgress(true);
-      setWinnerName("");
-    };
+    const { gameSettings, gameInProgress, gameFinished, gameMode } = this.props;
 
     return (
       <nav className="bg-transparent navbar navbar-expand-lg navbar-light bg-light">
         <select
           className="custom-select text-white"
           disabled={gameInProgress}
-          onChange={chaningMode}
-          name=""
-          id=""
+          onChange={this.chaningMode}
         >
           <option>Pick game mode</option>
           {gameSettings &&
@@ -48,15 +40,17 @@ class GameSettingsBar extends Component {
         </select>
         <input
           className="form-control mr-sm-2"
-          value={playerName}
-          onChange={onNameChange}
+          onChange={e => {
+            this.setState({ name: e.currentTarget.value.trim() });
+          }}
+          value={this.state.name}
           disabled={gameInProgress}
           type="text"
         />
         <button
           className="btn btn-outline-success my-2 my-sm-0"
-          disabled={!playerName || gameInProgress || !gameMode}
-          onClick={onButtonClick}
+          disabled={!this.state.name || gameInProgress || !gameMode}
+          onClick={this.onButtonClick}
         >
           {gameFinished ? "Replay" : "Play"}
         </button>
