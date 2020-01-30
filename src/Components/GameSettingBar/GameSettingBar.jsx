@@ -52,7 +52,7 @@ class GameSettingsBar extends Component {
           disabled={!this.state.name || gameInProgress || !gameMode}
           onClick={this.onButtonClick}
         >
-          {gameFinished ? "Replay" : "Play"}
+          {gameFinished ? "Play again" : "Play"}
         </button>
       </nav>
     );

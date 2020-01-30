@@ -32,16 +32,23 @@ class PlayingField extends Component {
     this.width = this.element.current.offsetWidth;
   }
 
-  componentDidUpdate(prevProps) {
+  updateField = () => {
+    this.setState({
+      fields: [],
+      currentField: {},
+      computerScore: 0,
+      playerScore: 0
+    });
+    this.createFields();
+  };
+
+  async componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
-      this.setState({
-        fields: [],
-        currentField: {},
-        computerScore: 0,
-        playerScore: 0
-      });
-      this.createFields();
+      if (this.props.gameMode !== prevProps.gameMode) {
+        this.updateField();
+      }
       if (this.props.gameInProgress && !this.props.gameFinished) {
+        await this.updateField();
         this.gameStartAndFail();
         this.width = this.element.current.offsetWidth;
       }
