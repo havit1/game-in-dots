@@ -42,6 +42,11 @@ class WinnersList extends Component {
 
   componentDidMount() {
     this.getWinnersList();
+    setInterval(this.getWinnersList, 100000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.getWinnersList, 100000);
   }
 
   componentDidUpdate(prevProps) {
