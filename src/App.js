@@ -99,7 +99,7 @@ class App extends Component {
             />
           )}
         </section>
-        <WinnersList winnerName={winnerName} gameFinished={gameFinished} />
+        {/* <WinnersList winnerName={winnerName} gameFinished={gameFinished} /> */}
       </div>
     );
   }
